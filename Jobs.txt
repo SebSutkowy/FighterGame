@@ -1,0 +1,5 @@
+Mansur - AI, Soundtrack
+Viktor - Sfx, Maps
+Ampofo - Animations, Graphics
+Anthony - Controller, UI
+Seb - Player, Collisions, Attacks
