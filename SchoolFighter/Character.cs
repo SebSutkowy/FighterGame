@@ -4,17 +4,20 @@ using Microsoft.Xna.Framework.Input;
 
 namespace SchoolFighter
 {
+    enum Direction
+    {
+        Left,
+        Right
+    }
+
     internal class Character : Sprite
     {
         float UpwardVelocity = 0f;
         bool Jumping = false;
-        string Facing;
+        Direction Facing = Direction.Right;
         private int Team { get; set; }
         public Character() : base () { }
-        public Character(Texture2D _texture, Vector2 _position, Color _color, float _velocity, string facing) : base(_texture, _position, _color, _velocity) 
-        {
-            Facing = facing;
-        }
+        public Character(Texture2D _texture, Vector2 _position, Color _color, float _velocity) : base(_texture, _position, _color, _velocity) { }
 
         public void Move()
         {
@@ -41,11 +44,11 @@ namespace SchoolFighter
             {
                 return null;
             }
-            if (Facing == "left")
+            if (Facing == Direction.Left)
             {
                 return new AttacHitbox(Team, Position.X - Texture.Width, Position.Y, Texture.Width, Texture.Height, 15);
             }
-            else if (Facing == "right")
+            else if (Facing == Direction.Right)
             {
                 return new AttacHitbox(Team, Position.X + Texture.Width, Position.Y, Texture.Width, Texture.Height, 15);
             }

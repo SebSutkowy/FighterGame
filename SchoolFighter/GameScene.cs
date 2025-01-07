@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Graphics;     
 using System.Collections.Generic;
 
 namespace SchoolFighter
@@ -13,7 +12,7 @@ namespace SchoolFighter
 
         public override void LoadContent()
         {
-            _player = new Character(Globals._playerTexture, new Vector2(0, 0), Color.White, 5.0f, "right");
+            _player = new Character(Globals._playerTexture, new Vector2(0, 0), Color.White, 5.0f);
         }
 
         public override void Update() 
