@@ -20,8 +20,8 @@ namespace SchoolFighter
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            _graphics.PreferredBackBufferWidth = 1920;
-            _graphics.PreferredBackBufferHeight = 1080;
+            _graphics.PreferredBackBufferWidth = Globals.winWidth;
+            _graphics.PreferredBackBufferHeight = Globals.winHeight;
             _graphics.IsFullScreen = true;
             _graphics.ApplyChanges();
 
@@ -33,10 +33,17 @@ namespace SchoolFighter
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            Globals._playerTexture = Content.Load<Texture2D>("297x528");
             SceneManager.Scenes = new Dictionary<string, Scene>
             {
-                {"MainMenu", new MainMenuScene()}
+                { "MainMenu", new MainMenuScene() },
+                { "Game", new GameScene() }
             };
+            SceneManager.CurrentScene = SceneManager.Scenes["Game"];
+            SceneManager.PreviousScene = null;
+            SceneManager.LoadContent();
+            _attackHitboxes = new List<AttacHitbox>();
+            
 
         }
 
@@ -55,8 +62,9 @@ namespace SchoolFighter
         {
             GraphicsDevice.Clear(Color.Black);
 
-            // TODO: Add your drawing code here
-            SceneManager.Draw();
+            _spriteBatch.Begin();
+            SceneManager.Draw(_spriteBatch);
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }

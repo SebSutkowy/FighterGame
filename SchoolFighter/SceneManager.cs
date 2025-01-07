@@ -1,5 +1,6 @@
 ﻿
 
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
 namespace SchoolFighter
@@ -10,6 +11,14 @@ namespace SchoolFighter
         public static Scene PreviousScene { get; set; }
         public static Dictionary<string, Scene> Scenes { get; set; }
 
+        public static void LoadContent()
+        {
+            if(CurrentScene != null)
+            {
+                CurrentScene.LoadContent();
+            }
+        }
+
         public static void Update()
         {
             if(CurrentScene != null)
@@ -18,11 +27,11 @@ namespace SchoolFighter
             }
         }
 
-        public static void Draw()
+        public static void Draw(SpriteBatch spriteBatch)
         {
             if (CurrentScene != null)
             {
-                CurrentScene.Draw();
+                CurrentScene.Draw(spriteBatch);
             }
         }
 
