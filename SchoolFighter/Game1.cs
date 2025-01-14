@@ -42,7 +42,6 @@ namespace SchoolFighter
             SceneManager.CurrentScene = SceneManager.Scenes["Game"];
             SceneManager.PreviousScene = null;
             SceneManager.LoadContent();
-            _attackHitboxes = new List<AttacHitbox>();
             
 
         }
