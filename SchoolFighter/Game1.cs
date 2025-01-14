@@ -25,6 +25,8 @@ namespace SchoolFighter
             _graphics.IsFullScreen = true;
             _graphics.ApplyChanges();
 
+            Globals.prevKeys = Keyboard.GetState();
+
             base.Initialize();
         }
 
@@ -51,7 +53,9 @@ namespace SchoolFighter
                 Exit();
 
             // TODO: Add your update logic here
+            Globals.keys = Keyboard.GetState();
             SceneManager.Update();
+            Globals.prevKeys = Globals.keys;
 
             base.Update(gameTime);
         }
