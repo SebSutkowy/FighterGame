@@ -1,11 +1,12 @@
 ﻿
 
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
 namespace SchoolFighter
 {
-    internal static class SceneManager
+    public static class SceneManager
     {
         public static Scene CurrentScene { get; set; }
         public static Scene PreviousScene { get; set; }
@@ -19,11 +20,11 @@ namespace SchoolFighter
             }
         }
 
-        public static void Update()
+        public static void Update(GameTime gameTime)
         {
             if(CurrentScene != null)
             {
-                CurrentScene.Update();
+                CurrentScene.Update(gameTime);
             }
         }
 

@@ -1,8 +1,9 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace SchoolFighter
 {
-    internal class MainMenuScene : Scene
+    public class MainMenuScene : Scene
     {
         public MainMenuScene() : base() 
         { 
@@ -14,7 +15,7 @@ namespace SchoolFighter
             // Load content here
         }
 
-        public override void Update()
+        public override void Update(GameTime gameTime)
         {
             // Write code for the main menu here
         }

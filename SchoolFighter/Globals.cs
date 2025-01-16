@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace SchoolFighter
 {
-    internal static class Globals
+    public static class Globals
     {
         public static Texture2D _playerTexture; // blank texture
         public static int winWidth = 1920;

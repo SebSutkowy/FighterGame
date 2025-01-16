@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace SchoolFighter
 {
-    internal class Sprite
+    public class Sprite
     {
         public Texture2D Texture { get; set; }
         public Vector2 Position { get; set; }

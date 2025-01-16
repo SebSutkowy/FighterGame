@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace SchoolFighter
 {
-    internal class Character : Sprite
+    public class Character : Sprite
     {
         float UpwardVelocity = 0f;
         bool Jumping = false;

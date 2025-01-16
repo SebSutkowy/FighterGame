@@ -10,6 +10,8 @@ namespace SchoolFighter
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        public MovementAI movement;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -52,7 +54,7 @@ namespace SchoolFighter
                 Exit();
 
             // TODO: Add your update logic here
-            SceneManager.Update();
+            SceneManager.Update(gameTime);
 
             base.Update(gameTime);
         }

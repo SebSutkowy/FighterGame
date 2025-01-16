@@ -7,24 +7,18 @@ namespace SchoolFighter
 {
     public class MovementAI 
     {
-        public Vector2 aiPos;
-        private Texture2D aiTex;
         public Vector2 velocity;
 
 
-        public void Update(GameTime gameTime, Vector2 playerPos, float speed)
+        public void Direction(GameTime gameTime, Character player , Character bot, float speed)
         {
-            Vector2 direction = playerPos - aiPos;
+            Vector2 direction = player.Position - bot.Position;
             direction.Normalize();
 
             velocity = speed * direction;
 
-            aiPos += (velocity * (float)gameTime.ElapsedGameTime.TotalSeconds);
+            bot.Position += (velocity * (float)gameTime.ElapsedGameTime.TotalSeconds);
             
-        }
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(aiTex, aiPos, Color.White);
         }
     }
 }

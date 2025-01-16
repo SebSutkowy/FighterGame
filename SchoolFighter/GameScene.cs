@@ -5,19 +5,23 @@ using System.Collections.Generic;
 
 namespace SchoolFighter
 {
-    internal class GameScene : Scene
+    public class GameScene : Scene
     {
         Character _player { get; set; }
+        public Character _enemy { get; set; }
         List<AttacHitbox> _attackHitboxes = new List<AttacHitbox>();
         public GameScene() { }
+        MovementAI botMove;
 
         public override void LoadContent()
         {
             _player = new Character(Globals._playerTexture, new Vector2(0, 0), Color.White, 5.0f, "right");
+            _enemy = new Character(Globals._playerTexture, new Vector2(400, 0), Color.White, 0f, "left");
         }
 
-        public override void Update() 
+        public override void Update(GameTime gameTime) 
         {
+
             _player.Move();
             AttacHitbox currentHitbox = _player.Attack();
             if(currentHitbox != null)
@@ -33,12 +37,14 @@ namespace SchoolFighter
                     _attackHitboxes.Remove(currentHitbox);
                 }
             }
-            
+
+            botMove.Direction(gameTime, _player, _enemy, 3f);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             _player.Draw(spriteBatch);
+            _enemy.Draw(spriteBatch);
             foreach(var hitbox in _attackHitboxes)
             {
                 hitbox.Draw(spriteBatch);

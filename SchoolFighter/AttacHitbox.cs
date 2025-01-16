@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace SchoolFighter
 {
-    internal class AttacHitbox
+    public class AttacHitbox
     {
         public Rectangle Hitbox { get; set; }
         public int Team { get; set; }
