@@ -16,10 +16,26 @@ namespace SchoolFighter
             Facing = facing;
         }
 
+        public void Update(bool playerInput) 
+        {
+            Position += new Vector2(0, -UpwardVelocity);
+            UpwardVelocity -= Globals.g;
+            if (Position.Y + Texture.Height > Globals.winHeight)
+            {
+                UpwardVelocity = 0f;
+                Position = new Vector2(Position.X, Globals.winHeight - Texture.Height);
+                Jumping = false;
+            }
+            if (!playerInput)
+            { return; }
+            Move();
+        }
         public void Move()
         {
             float g = 1.0f;
             int[] movement = { Keyboard.GetState().IsKeyDown(Keys.A) ? 1 : 0, Keyboard.GetState().IsKeyDown(Keys.D) ? 1 : 0 };
+            Position += new Vector2(Velocity * (movement[1] - movement[0]), -UpwardVelocity);
+            UpwardVelocity -= g;
             if(Keyboard.GetState().IsKeyDown(Keys.W) && !Jumping)
             {
                 UpwardVelocity += Velocity*5;
@@ -31,8 +47,7 @@ namespace SchoolFighter
                 Position = new Vector2(Position.X, Globals.winHeight - Texture.Height);
                 Jumping = false;
             }
-            Position += new Vector2(Velocity*(movement[1] - movement[0]), -UpwardVelocity);
-            UpwardVelocity -= g;
+            
         }
 
         public AttacHitbox Attack()

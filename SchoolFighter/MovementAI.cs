@@ -10,14 +10,18 @@ namespace SchoolFighter
         public Vector2 velocity;
 
 
-        public void Direction(GameTime gameTime, Character player , Character bot, float speed)
+        public void Direction(Character player , Character bot, float speed)
         {
             Vector2 direction = player.Position - bot.Position;
             direction.Normalize();
 
             velocity = speed * direction;
 
-            bot.Position += (velocity * (float)gameTime.ElapsedGameTime.TotalSeconds);
+            if(player.Position.X - bot.Position.X < 20 || player.Position.X + bot.Position.X > 20)
+            {
+                velocity = Vector2.Zero;
+            }
+            bot.Position += velocity;
             
         }
     }

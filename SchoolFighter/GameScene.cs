@@ -16,13 +16,15 @@ namespace SchoolFighter
         public override void LoadContent()
         {
             _player = new Character(Globals._playerTexture, new Vector2(0, 0), Color.White, 5.0f, "right");
-            _enemy = new Character(Globals._playerTexture, new Vector2(400, 0), Color.White, 0f, "left");
+            _enemy = new Character(Globals._playerTexture, new Vector2(400, 0), Color.White, 100f, "left");
+            botMove = new MovementAI();
         }
 
         public override void Update(GameTime gameTime) 
         {
 
-            _player.Move();
+            _player.Update(true);
+            _enemy.Update(false);
             AttacHitbox currentHitbox = _player.Attack();
             if(currentHitbox != null)
             {
@@ -38,7 +40,8 @@ namespace SchoolFighter
                 }
             }
 
-            botMove.Direction(gameTime, _player, _enemy, 3f);
+
+            botMove.Direction(_player, _enemy, 3f);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
