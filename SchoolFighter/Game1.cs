@@ -24,7 +24,7 @@ namespace SchoolFighter
             // TODO: Add your initialization logic here
             _graphics.PreferredBackBufferWidth = Globals.winWidth;
             _graphics.PreferredBackBufferHeight = Globals.winHeight;
-            _graphics.IsFullScreen = true;
+            _graphics.IsFullScreen = false;
             _graphics.ApplyChanges();
 
             base.Initialize();
@@ -53,8 +53,12 @@ namespace SchoolFighter
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+
+
             // TODO: Add your update logic here
+            Globals.UpdateTime(gameTime);
             SceneManager.Update(gameTime);
+            
 
             base.Update(gameTime);
         }

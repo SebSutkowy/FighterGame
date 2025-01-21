@@ -18,17 +18,21 @@ namespace SchoolFighter
 
         public void Update(bool playerInput) 
         {
-            Position += new Vector2(0, -UpwardVelocity);
-            UpwardVelocity -= Globals.g;
-            if (Position.Y + Texture.Height > Globals.winHeight)
-            {
-                UpwardVelocity = 0f;
-                Position = new Vector2(Position.X, Globals.winHeight - Texture.Height);
-                Jumping = false;
-            }
             if (!playerInput)
-            { return; }
-            Move();
+            {
+                Position += new Vector2(0, -UpwardVelocity);
+                UpwardVelocity -= Globals.g;
+                if (Position.Y + Texture.Height > Globals.winHeight)
+                {
+                    UpwardVelocity = 0f;
+                    Position = new Vector2(Position.X, Globals.winHeight - Texture.Height);
+                    Jumping = false;
+                }
+                return;
+            }
+            else
+                    Move();
+
         }
         public void Move()
         {

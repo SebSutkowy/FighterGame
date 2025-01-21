@@ -17,12 +17,26 @@ namespace SchoolFighter
 
             velocity = speed * direction;
 
-            if(player.Position.X - bot.Position.X < 20 || player.Position.X + bot.Position.X > 20)
+            System.Diagnostics.Debug.WriteLine(player.Position.X - bot.Position.X);
+
+            if (player.Position.X - bot.Position.X == 1 || player.Position.X - bot.Position.X == -2)
             {
-                velocity = Vector2.Zero;
+                float time = 0;
+                bool reset = false;
+                time += Globals.singleSecond;
+                if (time < 5)
+                    reset = true;
+                else if(time > 5)
+                {
+                    bot.Position += velocity;
+                    time = 0;
+                }
             }
-            bot.Position += velocity;
-            
+            else
+            {
+                bot.Position += velocity;
+            }
+
         }
     }
 }
