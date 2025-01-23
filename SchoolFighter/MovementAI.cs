@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace SchoolFighter
 {
@@ -14,27 +16,25 @@ namespace SchoolFighter
         {
             Vector2 direction = player.Position - bot.Position;
             direction.Normalize();
-
             velocity = speed * direction;
 
-            System.Diagnostics.Debug.WriteLine(player.Position.X - bot.Position.X);
+            bool stop = false;
 
-            if (player.Position.X - bot.Position.X == 1 || player.Position.X - bot.Position.X == -2)
+            if (!stop)
             {
-                float time = 0;
-                bool reset = false;
-                time += Globals.singleSecond;
-                if (time < 5)
-                    reset = true;
-                else if(time > 5)
+                if (player.Position.X - bot.Position.X >= 200 || bot.Position.X - player.Position.X >= 300)
+                {
+                    stop = true;
+                }
+                else
                 {
                     bot.Position += velocity;
-                    time = 0;
                 }
             }
-            else
+            if (stop)
             {
-                bot.Position += velocity;
+                Task.Delay(100);
+                stop = false;
             }
 
         }
