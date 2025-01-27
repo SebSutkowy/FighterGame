@@ -22,7 +22,7 @@ namespace SchoolFighter
 
             if (!stop)
             {
-                if (player.Position.X - bot.Position.X >= 200 || bot.Position.X - player.Position.X >= 300)
+                if (player.Position.X - bot.Position.X >= 500 || bot.Position.X - player.Position.X >= 500)
                 {
                     stop = true;
                 }
