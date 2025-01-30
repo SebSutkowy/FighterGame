@@ -12,6 +12,12 @@ namespace SchoolFighter
         public Rectangle Hitbox { get; set; }
         public bool IsVisible { get; set; }
 
+        public bool isCollided(Rectangle hitbox)
+        {
+            if(Hitbox.Intersects(hitbox)) return true;
+            return false;
+        }
+
         public Sprite()
         { }
 
@@ -24,6 +30,8 @@ namespace SchoolFighter
             Hitbox = new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
             IsVisible = true;
         }
+
+        
 
         public void Draw(SpriteBatch spriteBatch)
         {

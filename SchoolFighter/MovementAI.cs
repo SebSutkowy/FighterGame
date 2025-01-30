@@ -10,32 +10,44 @@ namespace SchoolFighter
     public class MovementAI 
     {
         public Vector2 velocity;
-        public int frames = 120;
+        public int frames = 0;
+        public bool wait = false;
 
 
         public void Direction(Character player , Character bot, float speed)
         {
-            frames -= 1;
+
             Vector2 direction = player.Position - bot.Position;
             direction.Normalize();
             velocity = speed * direction;
 
-            bool wait = false;
+            //Debug.WriteLine("general: " + frames);
+            Debug.WriteLine(wait);
+
+            if (wait)
+            {
+                while (frames !<= 0)
+                {
+                    //Debug.WriteLine("local: " + frames);
+                    frames -= 1;
+                }
+                if (frames <= 0)
+                {
+                    wait = false;
+                }
+            }
 
             if (!wait)
             {
-                if (player.Position.X - bot.Position.X >= player.Texture.Width || bot.Position.X - player.Position.X >= player.Texture.Width)
+                if (player.isCollided(bot.Hitbox))
                 {
                     frames = 120;
+                    wait = true;
                 }
-                else if(frames > 0)
+                if (frames > 0)
                 {
                     bot.Position += velocity;
                 }
-            }
-            else if (frames <= 0)
-            {
-                 
             }
 
         }

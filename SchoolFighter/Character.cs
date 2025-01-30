@@ -28,10 +28,10 @@ namespace SchoolFighter
                     Position = new Vector2(Position.X, Globals.winHeight - Texture.Height);
                     Jumping = false;
                 }
-                return;
             }
             else
                     Move();
+            Hitbox = new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
 
         }
         public void Move()
