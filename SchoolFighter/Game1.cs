@@ -22,7 +22,7 @@ namespace SchoolFighter
             // TODO: Add your initialization logic here
             _graphics.PreferredBackBufferWidth = Globals.winWidth;
             _graphics.PreferredBackBufferHeight = Globals.winHeight;
-            _graphics.IsFullScreen = true;
+            //_graphics.IsFullScreen = true;
             _graphics.ApplyChanges();
 
             Globals.prevKeys = Keyboard.GetState();
@@ -53,6 +53,7 @@ namespace SchoolFighter
                 Exit();
 
             // TODO: Add your update logic here
+            Globals.UpdateTime(gameTime);
             Globals.keys = Keyboard.GetState();
             SceneManager.Update();
             Globals.prevKeys = Globals.keys;

@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace SchoolFighter
 {
-    internal class AttacHitbox
+    internal class AttackHitbox
     {
         public Rectangle Hitbox { get; set; }
         public int Team { get; set; }
@@ -14,24 +14,38 @@ namespace SchoolFighter
         public Sprite Owner { get; set; }
         public Vector2 RelativePosition {get; set;}
         
-        public AttacHitbox(int _team, float x, float y, float width, float height, int lifespan, int damage, Vector2 velocity)
+        public Directions Direction { get; set; }
+        public AttackHitbox(int _team, float x, float y, float width, float height, int lifespan, int damage, Directions direction, Vector2 velocity)
         {
             Team = _team;
             Hitbox = new Rectangle((int)x, (int)y, (int)width, (int)height);
             Lifespan = lifespan;
             Damage = damage;
+            Direction = direction;
             Velocity = velocity;
             Owner = null;
         }
-        public AttacHitbox(int _team, float x, float y, float width, float height, int lifespan, int damage, Sprite owner)
+        public AttackHitbox(int _team, float x, float y, float width, float height, int lifespan, int damage, Directions direction, Sprite owner)
         {
             Team = _team;
             RelativePosition = new Vector2(x, y);
             Hitbox = new Rectangle((int)x, (int)y, (int)width, (int)height);
             Lifespan = lifespan;
             Damage = damage;
+            Direction = direction;
             Owner = owner;
             Velocity = Vector2.Zero;
+        }
+
+        public bool CheckCollision(Sprite player)
+        {
+            if (Hitbox.Intersects(player.Hitbox)) return true;
+            return false;
+        }
+        public bool CheckCollision(Rectangle hitbox)
+        {
+            if (Hitbox.Intersects(hitbox)) return true;
+            return false;
         }
 
         public void Update()
@@ -45,12 +59,12 @@ namespace SchoolFighter
             {
                 Hitbox = new Rectangle((int)Owner.Position.X + (int)RelativePosition.X, (int)Owner.Position.Y + (int)RelativePosition.Y, Hitbox.Width, Hitbox.Height);
             }
-            // check for collisions here maybe
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Globals._playerTexture, Hitbox, Color.Blue);
+            spriteBatch.Draw(Globals._playerTexture, Hitbox, Color.CornflowerBlue);
         }
     }
 }
