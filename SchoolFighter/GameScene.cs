@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 
 namespace SchoolFighter
 {
@@ -9,6 +11,10 @@ namespace SchoolFighter
         Character _enemy { get; set; }
         HealthBar _playerHealthBar { get; set; }
         HealthBar _enemyHealthBar { get; set; }
+        public int Timer { get; set; }
+        public string TimerText { get; set; }
+        public SpriteFont TimerFont { get; set; }
+        public Vector2 TimerFontOrigin;
         
         public GameScene() { }
 
@@ -16,26 +22,57 @@ namespace SchoolFighter
         {
             _player = new Character(Globals._playerTexture, Vector2.Zero, Color.White, 300.0f, Vector2.Zero, 100, 10, 1);
             _enemy = new Character(Globals._playerTexture, new Vector2(800, 0), Color.White, 300.0f, Vector2.Zero, 100, 10, 2);
-            _playerHealthBar = new HealthBar(_player.Health, Vector2.Zero, new Vector2(Globals.winWidth * 2 / 5, Globals.winHeight / 12), Directions.Left);
-            _enemyHealthBar = new HealthBar(_enemy.Health, new Vector2(Globals.winWidth * 3/5, 0), new Vector2(Globals.winWidth * 2 / 5, Globals.winHeight / 12), Directions.Right);
+            _playerHealthBar = new HealthBar(_player.Health, Vector2.Zero, new Vector2(Globals.winWidth * 2 / 5, Globals.winHeight / 12), Directions.Right);
+            _enemyHealthBar = new HealthBar(_enemy.Health, new Vector2(Globals.winWidth * 3/5, 0), new Vector2(Globals.winWidth * 2 / 5, Globals.winHeight / 12), Directions.Left);
+            Timer = 300 * 60;
+            TimerFont = Globals.Content.Load<SpriteFont>("TimerFont");
         }
 
         public override void Update() 
         {
+            Timer--;
+            TimerText = $"{Timer / 60}";
+            TimerFontOrigin = TimerFont.MeasureString(TimerText)/2;
             _player.Update();
             _enemy.Update(false);
             _playerHealthBar.Update(_player.Health);
             _enemyHealthBar.Update(_enemy.Health);
+            int winner = CheckWin();
+            Debug.WriteLine($"Winner: {winner}");
+            if(winner != 0)
+            {
+                SceneManager.ChangeScene("Victory", $"{winner}");
+            }
             HitboxManager.Update();
+        }
+
+        public int CheckWin()
+        {
+            Debug.WriteLine($"Player health: {_player.Health}, Enemy health: {_enemy.Health}");
+            if (_player.Health <= 0)
+                return 2;
+            if (_enemy.Health <= 0)
+                return 1;
+            if (Timer <= 0)
+                return -1;
+            return 0;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            //spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, Globals.winWidth, Globals.winHeight), Color.White);
             _player.Draw(spriteBatch);
             _enemy.Draw(spriteBatch);
             _playerHealthBar.Draw(spriteBatch);
             _enemyHealthBar.Draw(spriteBatch);
+            spriteBatch.DrawString(TimerFont, TimerText, new Vector2(Globals.winWidth / 2, 50), Color.White, 0, TimerFontOrigin, 1.0f, SpriteEffects.None, 0.5f);
+            spriteBatch.DrawString(TimerFont, $"{Globals.deltaTime}FPS", new Vector2(Globals.winWidth/2, Globals.winHeight - 50), Color.Green, 0, TimerFont.MeasureString($"{Globals.deltaTime}FPS"), 1.0f, SpriteEffects.None, 0.5f);
             HitboxManager.Draw(spriteBatch);
+        }
+
+        public override void AddData(string additionalData="")
+        {
+            return;
         }
     }
 }

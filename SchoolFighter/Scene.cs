@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace SchoolFighter
 {
@@ -9,5 +10,6 @@ namespace SchoolFighter
         public abstract void LoadContent();
         public abstract void Update();
         public abstract void Draw(SpriteBatch spriteBatch);
+        public abstract void AddData(string additionalData="");
     }
 }

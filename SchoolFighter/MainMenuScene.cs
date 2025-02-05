@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace SchoolFighter
 {
@@ -22,6 +23,11 @@ namespace SchoolFighter
         public override void Draw(SpriteBatch spriteBatch)
         { 
             // Draw here
+        }
+
+        public override void AddData(string additionalData = "")
+        {
+            return;
         }
     }
 }

@@ -36,10 +36,12 @@ namespace SchoolFighter
 
             // TODO: use this.Content to load your game content here
             Globals._playerTexture = Content.Load<Texture2D>("297x528");
+            Globals.Content = Content;
             SceneManager.Scenes = new Dictionary<string, Scene>
             {
                 { "MainMenu", new MainMenuScene() },
-                { "Game", new GameScene() }
+                { "Game", new GameScene() },
+                { "Victory", new VictoryScene() }
             };
             SceneManager.CurrentScene = SceneManager.Scenes["Game"];
             SceneManager.PreviousScene = null;

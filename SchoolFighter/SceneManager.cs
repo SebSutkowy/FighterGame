@@ -1,7 +1,10 @@
 ﻿
 
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace SchoolFighter
 {
@@ -24,6 +27,25 @@ namespace SchoolFighter
             if(CurrentScene != null)
             {
                 CurrentScene.Update();
+            }
+        }
+
+        public static void ChangeScene(string sceneName, string additionalData="")
+        {
+            if(Scenes.ContainsKey(sceneName))
+            {
+                PreviousScene = CurrentScene;
+                CurrentScene = Scenes[sceneName];
+                LoadContent();
+                Debug.WriteLine($"Changed to Scene {sceneName}");
+            }
+            else
+            {
+                Debug.WriteLine($"Error: Scene {sceneName} not found");
+            }
+            if(sceneName == "Victory")
+            {
+                Scenes[sceneName].AddData(additionalData);
             }
         }
 
