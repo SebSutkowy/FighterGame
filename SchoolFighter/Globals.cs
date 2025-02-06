@@ -27,7 +27,7 @@ namespace SchoolFighter
         public static void UpdateTime(GameTime gt)
         {
             deltaTime = (float)gt.ElapsedGameTime.TotalSeconds;
-            //Debug.WriteLine($"{1.0f / gt.ElapsedGameTime.TotalSeconds}FPS");
+            // Debug.WriteLine($"{1.0f / gt.ElapsedGameTime.TotalSeconds}FPS");
         }
     }
 }

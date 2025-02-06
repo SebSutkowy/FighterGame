@@ -66,7 +66,6 @@ namespace SchoolFighter
             _playerHealthBar.Draw(spriteBatch);
             _enemyHealthBar.Draw(spriteBatch);
             spriteBatch.DrawString(TimerFont, TimerText, new Vector2(Globals.winWidth / 2, 50), Color.White, 0, TimerFontOrigin, 1.0f, SpriteEffects.None, 0.5f);
-            spriteBatch.DrawString(TimerFont, $"{Globals.deltaTime}FPS", new Vector2(Globals.winWidth/2, Globals.winHeight - 50), Color.Green, 0, TimerFont.MeasureString($"{Globals.deltaTime}FPS"), 1.0f, SpriteEffects.None, 0.5f);
             HitboxManager.Draw(spriteBatch);
         }
 
