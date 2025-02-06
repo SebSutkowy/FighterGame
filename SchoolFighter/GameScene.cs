@@ -24,12 +24,13 @@ namespace SchoolFighter
             _enemy = new Character(Globals._playerTexture, new Vector2(800, 0), Color.White, 300.0f, Vector2.Zero, 100, 10, 2);
             _playerHealthBar = new HealthBar(_player.Health, Vector2.Zero, new Vector2(Globals.winWidth * 2 / 5, Globals.winHeight / 12), Directions.Right);
             _enemyHealthBar = new HealthBar(_enemy.Health, new Vector2(Globals.winWidth * 3/5, 0), new Vector2(Globals.winWidth * 2 / 5, Globals.winHeight / 12), Directions.Left);
-            Timer = 300 * 60;
+            Timer = 90 * 60;
             TimerFont = Globals.Content.Load<SpriteFont>("TimerFont");
         }
 
         public override void Update() 
         {
+
             Timer--;
             TimerText = $"{Timer / 60}";
             TimerFontOrigin = TimerFont.MeasureString(TimerText)/2;

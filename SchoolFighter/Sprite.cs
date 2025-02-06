@@ -1,17 +1,22 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace SchoolFighter
 {
     internal class Sprite
     {
-        public Texture2D Texture { get; set; }
         public Vector2 Position { get; set; }
         public Color Color { get; set; }
         public float Speed { get; set; }
         public Vector2 Velocity { get; set; }
         public Rectangle Hitbox { get; set; }
         public bool IsVisible { get; set; }
+
+        public List<Texture2D> idleFrames;
+        public int currentFrames;
+
+
 
         public Sprite()
         { }
