@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
 using System;
+using Microsoft.Xna.Framework.Content;
+using SharpDX.Direct3D9;
 
 namespace SchoolFighter
 {
@@ -93,6 +95,94 @@ namespace SchoolFighter
             StunTimer = Math.Sign(StunTimer)*(Math.Abs(StunTimer) - 1);
             
 
+        }
+
+        public void LoadContent(ContentManager content)
+        {
+            _texture = content.Load<Texture2D>("Ryu");
+
+            // Idle animation frames
+            _animationManager.AddAnimation("Idle", new Animation(_texture, new[]
+            {
+                new FrameDetails(75, 14, 60, 89),
+                new FrameDetails(7, 14, 59, 90),
+                new FrameDetails(277, 11, 58, 92),
+                new FrameDetails(211, 10, 55, 93)
+            }, 0.2f), 0);
+
+            // Walk Right animation frames
+            _animationManager.AddAnimation("WalkRight", new Animation(_texture, new[]
+            {
+                new FrameDetails(9, 136, 53, 83),
+                new FrameDetails(78, 130, 48, 90),
+                new FrameDetails(152, 128, 64, 92),
+                new FrameDetails(229, 130, 45, 91),
+                new FrameDetails(307, 128, 54, 91),
+                new FrameDetails(371, 128, 50, 89)
+            }, 0.1f), 2);
+
+            // Walk Left animation frames
+            _animationManager.AddAnimation("WalkLeft", new Animation(_texture, new[]
+            {
+                new FrameDetails(777, 128, 61, 87),
+                new FrameDetails(430, 124, 59, 90),
+                new FrameDetails(495, 124, 57, 90),
+                new FrameDetails(559, 124, 58, 90),
+                new FrameDetails(631, 125, 58, 91),
+                new FrameDetails(707, 126, 57, 89)
+            }, 0.1f), 1);
+
+            // Jump animation frames
+            _animationManager.AddAnimation("Jump", new Animation(_texture, new[]
+            {
+                new FrameDetails(67, 224, 56, 184),
+                new FrameDetails(138, 223, 50, 89),
+                new FrameDetails(197, 233, 54, 77),
+                new FrameDetails(259, 240, 48, 70),
+                new FrameDetails(319, 234, 48, 89),
+                new FrameDetails(375, 244, 55, 109)
+            }, JumpCooldown / 3f), 3);
+
+            _animationManager.AddAnimation("Crouch", new Animation(_texture, new[]
+            {
+                new FrameDetails(551, 21, 53, 83),
+                new FrameDetails(611, 36, 57, 69),
+                new FrameDetails(679, 44, 61, 69),
+            }, 0.1f), 4);
+
+            // Attack animations
+            _animationManager.AddAnimation("LightPunch", new Animation(_texture, new[]
+            {
+                new FrameDetails(9, 365, 54, 91),
+                new FrameDetails(88, 365, 92, 91)
+            }, AttackCooldown / 2f), 5);
+
+            _animationManager.AddAnimation("MediumHeavyPunch", new Animation(_texture, new[]
+            {
+                new FrameDetails(6, 466, 60, 94),
+                new FrameDetails(86, 465, 74, 95)
+            }, AttackCooldown / 2f), 6);
+
+            _animationManager.AddAnimation("HeavyPunch", new Animation(_texture, new[]
+            {
+                new FrameDetails(175, 465, 108, 94)
+            }, AttackCooldown / 1f), 7);
+
+            _animationManager.AddAnimation("LightMediumKick", new Animation(_texture, new[]
+            {
+                new FrameDetails(87, 923, 66, 92)
+            }, AttackCooldown / 1f), 8);
+
+            _animationManager.AddAnimation("MediumKick", new Animation(_texture, new[]
+            {
+                new FrameDetails(162, 922, 114, 94)
+            }, AttackCooldown / 1f), 9);
+
+            _animationManager.AddAnimation("HeavyKick", new Animation(_texture, new[]
+            {
+                new FrameDetails(5, 1196, 61, 94),
+                new FrameDetails(72, 1191, 92, 107)
+            }, AttackCooldown / 2f), 10);
         }
 
         public void Move()

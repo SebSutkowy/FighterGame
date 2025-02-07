@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace SchoolFighter
@@ -12,6 +13,16 @@ namespace SchoolFighter
         public Vector2 Velocity { get; set; }
         public Rectangle Hitbox { get; set; }
         public bool IsVisible { get; set; }
+
+        public static GraphicsDevice GraphicsDevice { get; set; }
+        public static ContentManager Content { get; set; }
+        public static float TotalSeconds { get; set; }
+
+        public static void Update(GameTime gameTime)
+        {
+            TotalSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
+        }
+
 
         public Sprite()
         { }

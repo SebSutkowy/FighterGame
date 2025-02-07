@@ -45,7 +45,9 @@ namespace SchoolFighter
             };
             SceneManager.CurrentScene = SceneManager.Scenes["Game"];
             SceneManager.PreviousScene = null;
-            SceneManager.LoadContent();            
+            SceneManager.LoadContent();
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+           
 
         }
 
@@ -60,6 +62,10 @@ namespace SchoolFighter
             SceneManager.Update();
             Globals.prevKeys = Globals.keys;
 
+            Sprite.Update(gameTime);  // Update global time
+           
+            base.Update(gameTime);
+
             base.Update(gameTime);
         }
 
@@ -69,6 +75,7 @@ namespace SchoolFighter
 
             _spriteBatch.Begin();
             SceneManager.Draw(_spriteBatch);
+            
             _spriteBatch.End();
 
             base.Draw(gameTime);
