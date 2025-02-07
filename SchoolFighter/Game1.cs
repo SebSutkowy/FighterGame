@@ -35,8 +35,13 @@ namespace SchoolFighter
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            Globals._playerTexture = Content.Load<Texture2D>("297x528");
+            Globals.idleFrames.Add(Content.Load<Texture2D>("ryu_idle0"));
+            Globals.idleFrames.Add(Content.Load<Texture2D>("ryu_idle1"));
+            Globals.idleFrames.Add(Content.Load<Texture2D>("ryu_idle2"));
+            Globals.idleFrames.Add(Content.Load<Texture2D>("ryu_idle3"));
+            Globals.idleFrames.Add(Content.Load<Texture2D>("ryu_idle4"));
             Globals.Content = Content;
+            Globals.healthBar = Content.Load<Texture2D>("297x528");
             SceneManager.Scenes = new Dictionary<string, Scene>
             {
                 { "MainMenu", new MainMenuScene() },

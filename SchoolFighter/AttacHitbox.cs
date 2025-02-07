@@ -64,7 +64,7 @@ namespace SchoolFighter
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Globals._playerTexture, Hitbox, Color.CornflowerBlue);
+            //spriteBatch.Draw(Globals.idleFrames[0], Hitbox, Color.CornflowerBlue);
         }
     }
 }

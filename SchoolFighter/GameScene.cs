@@ -20,8 +20,8 @@ namespace SchoolFighter
 
         public override void LoadContent()
         {
-            _player = new Character(Globals._playerTexture, Vector2.Zero, Color.White, 300.0f, Vector2.Zero, 100, 10, 1);
-            _enemy = new Character(Globals._playerTexture, new Vector2(800, 0), Color.White, 300.0f, Vector2.Zero, 100, 10, 2);
+            _player = new Character(Globals.idleFrames[0], Vector2.Zero, Color.White, 300.0f, Vector2.Zero, 100, 10, 1);
+            _enemy = new Character(Globals.idleFrames[0], new Vector2(800, 0), Color.White, 300.0f, Vector2.Zero, 100, 10, 2);
             _playerHealthBar = new HealthBar(_player.Health, Vector2.Zero, new Vector2(Globals.winWidth * 2 / 5, Globals.winHeight / 12), Directions.Right);
             _enemyHealthBar = new HealthBar(_enemy.Health, new Vector2(Globals.winWidth * 3/5, 0), new Vector2(Globals.winWidth * 2 / 5, Globals.winHeight / 12), Directions.Left);
             Timer = 90 * 60;

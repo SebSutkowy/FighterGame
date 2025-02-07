@@ -9,13 +9,15 @@ namespace SchoolFighter
 {
     internal static class Globals
     {
-        public static Texture2D _playerTexture; // blank texture
+        public static Texture2D healthBar;
+        public static List<Texture2D> idleFrames = new List<Texture2D>(); // blank texture
         public static float deltaTime;
         public static int winWidth = 1920;
         public static int winHeight = 1080; // window dimensions
         public static float g = 60.0f; // gravity
         public static KeyboardState keys, prevKeys; // keys and previously pressed keys to check if a key was pressed but not held down
         public static ContentManager Content;
+        public static GameTime gameTime;
 
         public static bool IsKeyPressed(Keys key)
         {
