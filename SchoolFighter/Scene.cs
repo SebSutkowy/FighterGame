@@ -6,7 +6,12 @@ namespace SchoolFighter
     internal abstract class Scene
     {
 
-        public Scene() { }
+        public Scene(Game1 game, GraphicsDevice graphicsDevice) { }
+
+        protected Scene()
+        {
+        }
+
         public abstract void LoadContent();
         public abstract void Update();
         public abstract void Draw(SpriteBatch spriteBatch);
