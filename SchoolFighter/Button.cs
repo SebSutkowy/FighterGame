@@ -6,9 +6,9 @@ using System;
 using System.ComponentModel;
 
 
-namespace SchoolFigher
+namespace SchoolFighter
 {
-    public class Button : Component
+    internal class Button : Component
     {
         #region Fields
 
@@ -64,7 +64,7 @@ namespace SchoolFigher
             PenColour = Color.Black;
         }
 
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void Draw( SpriteBatch spriteBatch)
         {
             var colour = Color.White;
             var expansion = 20;
@@ -98,7 +98,7 @@ namespace SchoolFigher
             }
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update()
         {
             _previousMouse = _currentMouse;
             _currentMouse = Mouse.GetState();
@@ -127,7 +127,9 @@ namespace SchoolFigher
             }
 
         }
+
         
+
         #endregion
     }
 }

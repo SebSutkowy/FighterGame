@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System.Drawing;
+using Color = Microsoft.Xna.Framework.Color;
 
 namespace SchoolFighter
 {
@@ -9,6 +11,7 @@ namespace SchoolFighter
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+
 
         public Game1()
         {
@@ -39,11 +42,12 @@ namespace SchoolFighter
             Globals.Content = Content;
             SceneManager.Scenes = new Dictionary<string, Scene>
             {
-                { "MainMenu", new MainMenuScene() },
+                { "MainMenu", new MainMenuScene(_graphics) },
+                {"SelectMenu", new CharecterSelectionScene() },
                 { "Game", new GameScene() },
                 { "Victory", new VictoryScene() }
             };
-            SceneManager.CurrentScene = SceneManager.Scenes["Game"];
+            SceneManager.CurrentScene = SceneManager.Scenes["MainMenu"];
             SceneManager.PreviousScene = null;
             SceneManager.LoadContent();            
 
@@ -58,6 +62,7 @@ namespace SchoolFighter
             Globals.UpdateTime(gameTime);
             Globals.keys = Keyboard.GetState();
             SceneManager.Update();
+            //Button.Update();
             Globals.prevKeys = Globals.keys;
 
             base.Update(gameTime);

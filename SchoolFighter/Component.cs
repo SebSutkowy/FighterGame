@@ -1,16 +1,19 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 
-namespace SchoolFIghter
+namespace SchoolFighter
 {
     public abstract class Component
     {
 
 
-        public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
+        public abstract void Draw(SpriteBatch spriteBatch);
 
-        public abstract void Update(GameTime gameTime);
+        public abstract void Update();
+
+        
     }
 }

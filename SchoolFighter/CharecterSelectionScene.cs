@@ -13,8 +13,8 @@ namespace SchoolFighter
 {
     internal class CharecterSelectionScene : Scene
     {
-        public CharecterSelectionScene(Game1 game, GraphicsDevice graphicsDevice)
-          : base(game, graphicsDevice)
+        public CharecterSelectionScene()
+          : base()
         {
             
         }
@@ -25,10 +25,10 @@ namespace SchoolFighter
         private Scene _currentState;
         public override void LoadContent()
         {
-            charTexture1 = Globals.Content.Load<Texture2D>("Control\\Ryu");
-            charTexture2 = Globals.Content.Load<Texture2D>("Control\\Charecter1");
-            int newWidth = charTexture1.Width * 2;
-            int newHeight = charTexture1.Height * 2;
+            charTexture1 = Globals.Content.Load<Texture2D>("Ryu");
+            charTexture2 = Globals.Content.Load<Texture2D>("Mai");
+            int newWidth = charTexture1.Width/4 ;
+            int newHeight = charTexture1.Height/4 ;
 
             charRect1 = new Rectangle(50, 50, newWidth, newHeight);
             charRect2 = new Rectangle(300, 50, newWidth, newHeight);
@@ -37,11 +37,11 @@ namespace SchoolFighter
         {
 
             
-            spriteBatch.Begin();
+            
             spriteBatch.Draw(charTexture1, charRect1, Color.White);
             spriteBatch.Draw(charTexture2, charRect2, Color.White);
 
-            spriteBatch.End();
+            
         }
 
         
@@ -55,7 +55,7 @@ namespace SchoolFighter
                 if (currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
                 {
 
-                    _currentState.Update();
+                    SceneManager.ChangeScene("Game",$"idk");
 
                     Debug.WriteLine("Rectangle clicked!");
                 }
