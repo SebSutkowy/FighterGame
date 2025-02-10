@@ -19,7 +19,7 @@ namespace SchoolFighter
         public Sprite(Texture2D _texture, Vector2 _position, Color _color, float _speed, Vector2 _velocity)
         {
             Texture = _texture;
-            Position = _position;    
+            Position = _position;
             Color = _color;
             Speed = _speed;
             Velocity = _velocity;

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace SchoolFighter
 {
@@ -22,6 +23,16 @@ namespace SchoolFighter
         {
             _player = new Character(Globals._playerTexture, Vector2.Zero, Color.White, 300.0f, Vector2.Zero, 100, 10, 1);
             _enemy = new Character(Globals._playerTexture, new Vector2(800, 0), Color.White, 300.0f, Vector2.Zero, 100, 10, 2);
+            _enemy.SetBinds(
+                new Dictionary<string, Microsoft.Xna.Framework.Input.Keys>()
+                {
+                    {"Move left", Microsoft.Xna.Framework.Input.Keys.J },
+                    {"Move right", Microsoft.Xna.Framework.Input.Keys.L },
+                    {"Jump", Microsoft.Xna.Framework.Input.Keys.I },
+                    {"Crouch", Microsoft.Xna.Framework.Input.Keys.K },
+                    {"Punch", Microsoft.Xna.Framework.Input.Keys.U }
+                }
+            );
             _playerHealthBar = new HealthBar(_player.Health, Vector2.Zero, new Vector2(Globals.winWidth * 2 / 5, Globals.winHeight / 12), Directions.Right);
             _enemyHealthBar = new HealthBar(_enemy.Health, new Vector2(Globals.winWidth * 3/5, 0), new Vector2(Globals.winWidth * 2 / 5, Globals.winHeight / 12), Directions.Left);
             Timer = 300 * 60;
@@ -34,7 +45,7 @@ namespace SchoolFighter
             TimerText = $"{Timer / 60}";
             TimerFontOrigin = TimerFont.MeasureString(TimerText)/2;
             _player.Update();
-            _enemy.Update(false);
+            _enemy.Update();
             _playerHealthBar.Update(_player.Health);
             _enemyHealthBar.Update(_enemy.Health);
             int winner = CheckWin();

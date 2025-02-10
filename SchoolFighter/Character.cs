@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
 using System;
+using System.Collections.Generic;
 
 namespace SchoolFighter
 {
@@ -31,6 +32,15 @@ namespace SchoolFighter
         public int Health { get; set; }
         public int Strength { get; set; }
         public int Team { get; set; }
+        public Dictionary<string, Keys> KeyBinds = new Dictionary<string, Keys>()
+        {
+            {"Move left", Keys.A },
+            {"Move right", Keys.D },
+            {"Jump", Keys.W },
+            {"Crouch", Keys.S },
+            {"Punch", Keys.E }
+        };
+
         public Character() : base () { }
         public Character(Texture2D _texture, Vector2 _position, Color _color, float _speed, Vector2 _velocity, int health, int strength, int team) : base(_texture, _position, _color, _speed, _velocity)
         {
@@ -38,6 +48,12 @@ namespace SchoolFighter
             Strength = strength;
             Team = team;
         }
+
+        public void SetBinds(Dictionary<string, Keys> binds)
+        {
+            KeyBinds = binds;
+        }
+
         public void Update(bool enableMovement = true)
         {
             // check for attacks
@@ -95,10 +111,12 @@ namespace SchoolFighter
 
         }
 
+
+
         public void Move()
         { 
-            int[] movement = { Globals.keys.IsKeyDown(Keys.A) ? 1 : 0, Globals.keys.IsKeyDown(Keys.D) ? 1 : 0 };
-            if (Globals.keys.IsKeyDown(Keys.W) && !Jumping)
+            int[] movement = { Globals.keys.IsKeyDown(KeyBinds["Move left"]) ? 1 : 0, Globals.keys.IsKeyDown(KeyBinds["Move right"]) ? 1 : 0 };
+            if (Globals.keys.IsKeyDown(KeyBinds["Jump"]) && !Jumping)
             {
                 Velocity = new Vector2(Velocity.X, Speed * 5); // Jump
                 Jumping = true;
@@ -121,7 +139,7 @@ namespace SchoolFighter
         {
             // Generate Hitboxes
             if (AttackCooldown > 0) return null;
-            if(Globals.IsKeyPressed(Keys.S) && Jumping)
+            if (Globals.IsKeyPressed(KeyBinds["Crouch"]) && Jumping)
             {
                 AttackCooldown = AttackCooldownMax;
                 Falling = AttackCooldownMax;
@@ -129,14 +147,14 @@ namespace SchoolFighter
                 return new AttackHitbox(Team, 0, 0, Texture.Width, 3*Texture.Height/2, AttackCooldownMax/2, (int)(Strength*1.25f), Directions.Down, this);
                 // Ground Pound
             }
-            Crouching = (Globals.keys.IsKeyDown(Keys.S) && !Jumping) ? true : false; 
-            if (Globals.IsKeyPressed(Keys.E) && Facing == Directions.Left)
+            Crouching = (Globals.keys.IsKeyDown(KeyBinds["Crouch"]) && !Jumping) ? true : false; 
+            if (Globals.IsKeyPressed(KeyBinds["Punch"]) && Facing == Directions.Left)
             {
                 AttackCooldown = AttackCooldownMax;
                 return new AttackHitbox(Team, Hitbox.X - Hitbox.Width*0.25f, Hitbox.Y, Texture.Width*1.25f, Texture.Height/2, AttackCooldownMax/2, Strength, Directions.Left, Vector2.Zero);
                 // Left punch
             }
-            else if (Globals.IsKeyPressed(Keys.E) && Facing == Directions.Right)
+            else if (Globals.IsKeyPressed(KeyBinds["Punch"]) && Facing == Directions.Right)
             {
                 AttackCooldown = AttackCooldownMax;
                 return new AttackHitbox(Team, Hitbox.X, Hitbox.Y, Texture.Width*1.25f, Texture.Height/2, AttackCooldownMax/2, Strength, Directions.Right, Vector2.Zero);
