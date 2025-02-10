@@ -55,7 +55,7 @@ namespace SchoolFighter
                 if (currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
                 {
 
-                    SceneManager.ChangeScene("Game",$"idk");
+                    SceneManager.ChangeScene("Game");
 
                     Debug.WriteLine("Rectangle clicked!");
                 }

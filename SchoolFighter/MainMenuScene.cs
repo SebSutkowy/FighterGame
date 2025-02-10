@@ -84,7 +84,7 @@ namespace SchoolFighter
 
         private void NewGameButton_Click(object sender, EventArgs e)
         {
-            SceneManager.ChangeScene("SelectMenu",$"idk");
+            SceneManager.ChangeScene("SelectMenu");
         }
 
         public override void LoadContent()
