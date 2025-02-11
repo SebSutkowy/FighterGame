@@ -21,8 +21,8 @@ namespace SchoolFighter
 
         public override void LoadContent()
         {
-            _player = new Character(Globals._playerTexture, Vector2.Zero, Color.White, 300.0f, Vector2.Zero, 100, 10, 1);
-            _enemy = new Character(Globals._playerTexture, new Vector2(800, 0), Color.White, 300.0f, Vector2.Zero, 100, 10, 2);
+            _player = new Character(Globals._playerTexture[0], Vector2.Zero, Color.White, 300.0f, Vector2.Zero, 100, 10, 1, Globals._playerTexture);
+            _enemy = new Character(Globals._playerTexture[0], new Vector2(800, 0), Color.White, 300.0f, Vector2.Zero, 100, 10, 2, Globals._playerTexture);
             _enemy.SetBinds(
                 new Dictionary<string, Microsoft.Xna.Framework.Input.Keys>()
                 {

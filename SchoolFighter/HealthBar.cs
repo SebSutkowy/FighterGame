@@ -38,7 +38,7 @@ namespace SchoolFighter
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Globals._playerTexture, healthBar, Color.Green);
+            spriteBatch.Draw(Globals._blankTexture, healthBar, Color.Green);
         }
     }  
 }

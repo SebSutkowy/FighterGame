@@ -28,7 +28,10 @@ namespace SchoolFighter
         private bool UpwardsKnockback = false;
         private bool Crouching = false;
         private int KnockbackDirection = 0;
+        private int CurrentFrame = 0;
+        private const int CyclePeriod = 30;
         
+        public List<Texture2D> Textures { get; set; }
         public int Health { get; set; }
         public int Strength { get; set; }
         public int Team { get; set; }
@@ -42,11 +45,12 @@ namespace SchoolFighter
         };
 
         public Character() : base () { }
-        public Character(Texture2D _texture, Vector2 _position, Color _color, float _speed, Vector2 _velocity, int health, int strength, int team) : base(_texture, _position, _color, _speed, _velocity)
+        public Character(Texture2D _texture, Vector2 _position, Color _color, float _speed, Vector2 _velocity, int health, int strength, int team, List<Texture2D> _textures) : base(_texture, _position, _color, _speed, _velocity)
         {
             Health = health;
             Strength = strength;
             Team = team;
+            Textures = _textures;
         }
 
         public void SetBinds(Dictionary<string, Keys> binds)
@@ -161,6 +165,14 @@ namespace SchoolFighter
                 // Right punch
             }
             return null;
+        }
+
+        public new void Draw(SpriteBatch spriteBatch)
+        {
+            Debug.WriteLine($"Current frame: {CurrentFrame}");
+            CurrentFrame++;
+            CurrentFrame = (CurrentFrame) % CyclePeriod;
+            spriteBatch.Draw(Textures[CurrentFrame / (CyclePeriod / Textures.Count)], Hitbox, Color.White);
         }
 
     }

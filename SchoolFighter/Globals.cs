@@ -2,13 +2,15 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace SchoolFighter
 {
     internal static class Globals
     {
-        public static Texture2D _playerTexture; // blank texture
+        public static Texture2D _blankTexture;
+        public static List<Texture2D> _playerTexture = new List<Texture2D>(); // blank texture
         public static float deltaTime;
         public static int winWidth = 1920;
         public static int winHeight = 1080; // window dimensions
