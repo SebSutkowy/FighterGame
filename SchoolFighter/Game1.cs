@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace SchoolFighter
 {
+    // yoo family
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
