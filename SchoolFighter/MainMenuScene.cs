@@ -24,9 +24,9 @@ namespace SchoolFighter
         {
             // Write anything that will be in the main menu when you start it here.
 
-            var buttonTexture = Globals.Content.Load<Texture2D>("button");
+            var buttonTexture = Globals.Content.Load<Texture2D>("button5");
             var buttonFont = Globals.Content.Load<SpriteFont>("Font");
-            int width = (_graphics.PreferredBackBufferWidth / 2) - 100;
+            int width = (_graphics.PreferredBackBufferWidth / 3) - 100;
             var height = (_graphics.PreferredBackBufferHeight / 2);
             Vector2 place = new Vector2(width, height - 200);
             int place1 = width - (width - 200);

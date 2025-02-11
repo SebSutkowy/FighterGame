@@ -16,7 +16,7 @@ namespace SchoolFighter
 
         private GamePadState _currentGamePadState;
 
-        private Rectangle myRectangle;
+        private Rectangle myRectangle,myRectangle2;
 
         private SpriteFont _font;
 
@@ -61,7 +61,7 @@ namespace SchoolFighter
 
             _font = font;
 
-            PenColour = Color.Black;
+            PenColour = Color.White;
         }
 
         public override void Draw( SpriteBatch spriteBatch)
@@ -75,8 +75,8 @@ namespace SchoolFighter
                 colour = Color.Gray;
                 myRectangle.X = myRectangle.X - expansion / 2;
                 myRectangle.Y = myRectangle.Y - expansion / 2;
-                myRectangle.Width = Rectangle.Width + (expansion * 9 / 8);
-                myRectangle.Height = Rectangle.Height + (expansion * 9 / 8);
+                myRectangle.Width = (Rectangle.Width) + (expansion * 9 / 8);
+                myRectangle.Height = (Rectangle.Height) + (expansion * 9 / 8);
                 spriteBatch.Draw(_texture, myRectangle, colour);
 
             }
@@ -86,7 +86,10 @@ namespace SchoolFighter
             }
             if (!_isHovering)
             {
+                myRectangle2.Width = Rectangle.Width * 3;
+                myRectangle2.Height = Rectangle.Height * 3;
                 spriteBatch.Draw(_texture, Rectangle, colour);
+                
             }
 
             if (!string.IsNullOrEmpty(Text))

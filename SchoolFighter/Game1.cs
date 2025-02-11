@@ -61,7 +61,7 @@ namespace SchoolFighter
             // TODO: Add your update logic here
             Globals.UpdateTime(gameTime);
             Globals.keys = Keyboard.GetState();
-            Globals.controller = GamePad.GetState();
+            //Globals.controller = GamePad.GetState();
             SceneManager.Update();
             //Button.Update();
             Globals.prevKeys = Globals.keys;
