@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Reflection.Metadata;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using SchoolFighter;
-
-
+using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace SchoolFighter
 {
-    internal class MainMenuScene : Scene
+    internal class PauseMenu : Scene
     {
         private List<Component> _components;
         private Game _game;
@@ -20,7 +17,7 @@ namespace SchoolFighter
         //private Game1 _game2;
         GamePadState state = GamePad.GetState(PlayerIndex.One);
 
-        public MainMenuScene(GraphicsDeviceManager _graphics) : base()
+        public PauseMenu(GraphicsDeviceManager _graphics) : base()
         {
             // Write anything that will be in the main menu when you start it here.
 
@@ -42,7 +39,7 @@ namespace SchoolFighter
             var newGameButton = new Button(buttonTexture, buttonFont)
             {
                 Position = new Vector2(width, height - 200),
-                Text = "New Game",
+                Text = "Resume",
 
             };
 
@@ -51,7 +48,7 @@ namespace SchoolFighter
             var loadGameButton = new Button(buttonTexture, buttonFont)
             {
                 Position = new Vector2(width, height),
-                Text = "Load Game",
+                Text = "Settings",
             };
 
             loadGameButton.Click += LoadGameButton_Click;
@@ -59,7 +56,7 @@ namespace SchoolFighter
             var quitGameButton = new Button(buttonTexture, buttonFont)
             {
                 Position = new Vector2(width, height + 200),
-                Text = "Quit",
+                Text = "Exit",
             };
 
             quitGameButton.Click += QuitGameButton_Click;
@@ -84,7 +81,7 @@ namespace SchoolFighter
 
         private void NewGameButton_Click(object sender, EventArgs e)
         {
-            SceneManager.ChangeScene("SelectMenu");
+            SceneManager.ChangeScene("Game","Resume");
         }
 
         public override void LoadContent()
@@ -120,6 +117,4 @@ namespace SchoolFighter
 
     }
 }
-
-
 

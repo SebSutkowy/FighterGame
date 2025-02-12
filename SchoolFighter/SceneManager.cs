@@ -36,7 +36,10 @@ namespace SchoolFighter
             {
                 PreviousScene = CurrentScene;
                 CurrentScene = Scenes[sceneName];
-                LoadContent();
+                if (additionalData != "Resume")
+                {
+                    LoadContent();
+                }
                 Debug.WriteLine($"Changed to Scene {sceneName}");
             }
             else

@@ -37,6 +37,8 @@ namespace SchoolFighter
             _enemyHealthBar = new HealthBar(_enemy.Health, new Vector2(Globals.winWidth * 3/5, 0), new Vector2(Globals.winWidth * 2 / 5, Globals.winHeight / 12), Directions.Left);
             Timer = 300 * 60;
             TimerFont = Globals.Content.Load<SpriteFont>("TimerFont");
+            TimerText = "90";
+
         }
 
         public override void Update() 

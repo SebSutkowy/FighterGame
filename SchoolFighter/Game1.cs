@@ -45,11 +45,13 @@ namespace SchoolFighter
             Globals.Content = Content;
             SceneManager.Scenes = new Dictionary<string, Scene>
             {
-                { "MainMenu", new MainMenuScene() },
+                { "MainMenu", new MainMenuScene(_graphics) },
+                {"SelectMenu", new CharecterSelectionScene() },
                 { "Game", new GameScene() },
-                { "Victory", new VictoryScene() }
+                { "Victory", new VictoryScene() },
+                {"Pause", new PauseMenu(_graphics) }
             };
-            SceneManager.CurrentScene = SceneManager.Scenes["Game"];
+            SceneManager.CurrentScene = SceneManager.Scenes["MainMenu"];
             SceneManager.PreviousScene = null;
             SceneManager.LoadContent();            
 
@@ -59,7 +61,11 @@ namespace SchoolFighter
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            if (Keyboard.GetState().IsKeyDown(Keys.Q))
+            {
+                SceneManager.ChangeScene("Pause");
 
+            }
             // TODO: Add your update logic here
             Globals.UpdateTime(gameTime);
             Globals.keys = Keyboard.GetState();
