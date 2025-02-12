@@ -10,7 +10,6 @@ namespace SchoolFighter
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -37,11 +36,10 @@ namespace SchoolFighter
 
             // TODO: use this.Content to load your game content here
             Globals._blankTexture = Content.Load<Texture2D>("297x528");
-            Globals._playerTexture.Add(Content.Load<Texture2D>("ryu_idle0"));
-            Globals._playerTexture.Add(Content.Load<Texture2D>("ryu_idle1"));
-            Globals._playerTexture.Add(Content.Load<Texture2D>("ryu_idle2"));
-            Globals._playerTexture.Add(Content.Load<Texture2D>("ryu_idle3"));
-            Globals._playerTexture.Add(Content.Load<Texture2D>("ryu_idle4"));
+            for(int i = 0; i < 5; i++)
+            {
+                Globals._playerTexture.Add(Content.Load<Texture2D>($"ryu_idle{i}"));
+            }
             Globals.Content = Content;
             SceneManager.Scenes = new Dictionary<string, Scene>
             {
