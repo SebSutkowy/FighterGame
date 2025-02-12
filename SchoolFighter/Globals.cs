@@ -16,6 +16,7 @@ namespace SchoolFighter
         public static int winHeight = 1080; // window dimensions
         public static float g = 60.0f; // gravity
         public static KeyboardState keys, prevKeys; // keys and previously pressed keys to check if a key was pressed but not held down
+        public static GamePadState buttons, prevButtons;
         public static ContentManager Content;
 
         public static bool IsKeyPressed(Keys key)
@@ -25,7 +26,12 @@ namespace SchoolFighter
                 return true;
             return false;
         }
-
+        public static bool IsButtonPressed(Buttons button)
+        {
+            if (buttons.IsButtonDown(button) && !prevButtons.IsButtonDown(button) )
+                return true;
+            return false;
+        }
         public static void UpdateTime(GameTime gt)
         {
             deltaTime = (float)gt.ElapsedGameTime.TotalSeconds;

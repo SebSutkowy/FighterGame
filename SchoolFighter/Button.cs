@@ -63,7 +63,10 @@ namespace SchoolFighter
 
             PenColour = Color.White;
         }
+        public static void LoadContent()
+        {
 
+        }
         public override void Draw(SpriteBatch spriteBatch)
         {
             var colour = Color.White;
@@ -80,10 +83,7 @@ namespace SchoolFighter
                 spriteBatch.Draw(_texture, myRectangle, colour);
 
             }
-            if (GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.DPadDown) || GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.LeftThumbstickDown))
-            {
-
-            }
+            
             if (!_isHovering)
             {
                 myRectangle2.Width = Rectangle.Width * 3;

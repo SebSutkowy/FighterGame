@@ -33,6 +33,14 @@ namespace SchoolFighter
                     {"Punch", Microsoft.Xna.Framework.Input.Keys.U }
                 }
             );
+            _enemy.SetBinds1(new Dictionary<string, Microsoft.Xna.Framework.Input.Buttons>()
+                {
+                    {"Move left", Microsoft.Xna.Framework.Input.Buttons.DPadLeft },
+                    {"Move right", Microsoft.Xna.Framework.Input.Buttons.DPadRight },
+                    {"Jump", Microsoft.Xna.Framework.Input.Buttons.DPadUp },
+                    {"Crouch", Microsoft.Xna.Framework.Input.Buttons.DPadDown },
+                    {"Punch", Microsoft.Xna.Framework.Input.Buttons.LeftTrigger }
+                });
             _playerHealthBar = new HealthBar(_player.Health, Vector2.Zero, new Vector2(Globals.winWidth * 2 / 5, Globals.winHeight / 12), Directions.Right);
             _enemyHealthBar = new HealthBar(_enemy.Health, new Vector2(Globals.winWidth * 3/5, 0), new Vector2(Globals.winWidth * 2 / 5, Globals.winHeight / 12), Directions.Left);
             Timer = 300 * 60;

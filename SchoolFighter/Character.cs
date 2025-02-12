@@ -43,6 +43,14 @@ namespace SchoolFighter
             {"Crouch", Keys.S },
             {"Punch", Keys.E }
         };
+        public Dictionary<string, Buttons> ButtonBinds = new Dictionary<string, Buttons>()
+        {
+            {"Move left", Buttons.LeftThumbstickLeft },
+            {"Move right", Buttons. LeftThumbstickRight },
+            {"Jump", Buttons.A },
+            {"Crouch", Buttons.RightThumbstickDown },
+            {"Punch", Buttons.B }
+        };
 
         public Character() : base () { }
         public Character(Texture2D _texture, Vector2 _position, Color _color, float _speed, Vector2 _velocity, int health, int strength, int team, List<Texture2D> _textures) : base(_texture, _position, _color, _speed, _velocity)
@@ -56,6 +64,10 @@ namespace SchoolFighter
         public void SetBinds(Dictionary<string, Keys> binds)
         {
             KeyBinds = binds;
+        }
+        public void SetBinds1(Dictionary<string, Buttons> binds1) 
+        {
+            ButtonBinds = binds1;
         }
 
         public void Update(bool enableMovement = true)
@@ -120,7 +132,13 @@ namespace SchoolFighter
         public void Move()
         { 
             int[] movement = { Globals.keys.IsKeyDown(KeyBinds["Move left"]) ? 1 : 0, Globals.keys.IsKeyDown(KeyBinds["Move right"]) ? 1 : 0 };
+            int[] movement1 = { Globals.buttons.IsButtonDown(ButtonBinds["Move left"]) ? 1 : 0, Globals.buttons.IsButtonDown(ButtonBinds["Move right"]) ? 1 : 0 };
             if (Globals.keys.IsKeyDown(KeyBinds["Jump"]) && !Jumping)
+            {
+                Velocity = new Vector2(Velocity.X, Speed * 5); // Jump
+                Jumping = true;
+            }
+            if (Globals.buttons.IsButtonDown(ButtonBinds["Jump"]) && !Jumping)
             {
                 Velocity = new Vector2(Velocity.X, Speed * 5); // Jump
                 Jumping = true;
@@ -133,6 +151,18 @@ namespace SchoolFighter
                     Facing = Directions.Left;
                 }
                 else if (movement[1] - movement[0] > 0)
+                {
+                    Facing = Directions.Right;
+                }
+            }
+            if (AttackCooldown <= 0 || Falling > 0)
+            {
+                Position += new Vector2(Speed * (movement1[1] - movement1[0]) * Globals.deltaTime, 0);
+                if (movement1[1] - movement1[0] < 0) // Change the directions the player is facing
+                {
+                    Facing = Directions.Left;
+                }
+                else if (movement1[1] - movement1[0] > 0)
                 {
                     Facing = Directions.Right;
                 }
@@ -151,7 +181,16 @@ namespace SchoolFighter
                 return new AttackHitbox(Team, 0, 0, Texture.Width, 3*Texture.Height/2, AttackCooldownMax/2, (int)(Strength*1.25f), Directions.Down, this);
                 // Ground Pound
             }
-            Crouching = (Globals.keys.IsKeyDown(KeyBinds["Crouch"]) && !Jumping) ? true : false; 
+            if (Globals.IsButtonPressed(ButtonBinds["Crouch"]) && Jumping)
+            {
+                AttackCooldown = AttackCooldownMax;
+                Falling = AttackCooldownMax;
+                Velocity = new Vector2(Velocity.X, -50 * Globals.g);
+                return new AttackHitbox(Team, 0, 0, Texture.Width, 3 * Texture.Height / 2, AttackCooldownMax / 2, (int)(Strength * 1.25f), Directions.Down, this);
+                // Ground Pound
+            }
+            Crouching = (Globals.keys.IsKeyDown(KeyBinds["Crouch"]) && !Jumping) ? true : false;
+            Crouching = (Globals.buttons.IsButtonDown(ButtonBinds["Crouch"]) && !Jumping) ? true : false;
             if (Globals.IsKeyPressed(KeyBinds["Punch"]) && Facing == Directions.Left)
             {
                 AttackCooldown = AttackCooldownMax;
@@ -162,6 +201,18 @@ namespace SchoolFighter
             {
                 AttackCooldown = AttackCooldownMax;
                 return new AttackHitbox(Team, Hitbox.X, Hitbox.Y, Texture.Width*1.25f, Texture.Height/2, AttackCooldownMax/2, Strength, Directions.Right, Vector2.Zero);
+                // Right punch
+            }
+            if (Globals.IsButtonPressed(ButtonBinds["Punch"]) && Facing == Directions.Left)
+            {
+                AttackCooldown = AttackCooldownMax;
+                return new AttackHitbox(Team, Hitbox.X - Hitbox.Width * 0.25f, Hitbox.Y, Texture.Width * 1.25f, Texture.Height / 2, AttackCooldownMax / 2, Strength, Directions.Left, Vector2.Zero);
+                // Left punch
+            }
+            else if (Globals.IsButtonPressed(ButtonBinds["Punch"]) && Facing == Directions.Right)
+            {
+                AttackCooldown = AttackCooldownMax;
+                return new AttackHitbox(Team, Hitbox.X, Hitbox.Y, Texture.Width * 1.25f, Texture.Height / 2, AttackCooldownMax / 2, Strength, Directions.Right, Vector2.Zero);
                 // Right punch
             }
             return null;

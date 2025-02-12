@@ -27,6 +27,7 @@ namespace SchoolFighter
             _graphics.ApplyChanges();
 
             Globals.prevKeys = Keyboard.GetState();
+            Globals.prevButtons = GamePad.GetState(PlayerIndex.One);
 
             base.Initialize();
         }
@@ -61,16 +62,21 @@ namespace SchoolFighter
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            if (Keyboard.GetState().IsKeyDown(Keys.Q))
+            if (Keyboard.GetState().IsKeyDown(Keys.Q) || GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed)
             {
                 SceneManager.ChangeScene("Pause");
 
             }
+            
+
             // TODO: Add your update logic here
             Globals.UpdateTime(gameTime);
             Globals.keys = Keyboard.GetState();
+            Globals.buttons = GamePad.GetState(PlayerIndex.One);
             SceneManager.Update();
             Globals.prevKeys = Globals.keys;
+            Globals.prevButtons = Globals.buttons;
+
 
             base.Update(gameTime);
         }
