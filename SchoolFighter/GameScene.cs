@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+
 using System.Diagnostics;
 
 namespace SchoolFighter
@@ -15,7 +16,10 @@ namespace SchoolFighter
         public string TimerText { get; set; }
         public SpriteFont TimerFont { get; set; }
         public Vector2 TimerFontOrigin;
-        
+        TileMap _map = new TileMap();
+        Texture2D _pixelTemplate;
+        Tile[] _tiles = new Tile[9];
+
         public GameScene() { }
 
         public override void LoadContent()
@@ -26,6 +30,12 @@ namespace SchoolFighter
             _enemyHealthBar = new HealthBar(_enemy.Health, new Vector2(Globals.winWidth * 3/5, 0), new Vector2(Globals.winWidth * 2 / 5, Globals.winHeight / 12), Directions.Left);
             Timer = 300 * 60;
             TimerFont = Globals.Content.Load<SpriteFont>("TimerFont");
+
+            _pixelTemplate = Globals.Content.Load<Texture2D>("pixel");
+            
+            _tiles[0] = new Tile(100, new Vector2(0, 0), _pixelTemplate);
+            _tiles[2] = new Tile(100, new Vector2(200, 0), _pixelTemplate);
+            _map = new TileMap();
         }
 
         public override void Update() 
@@ -67,7 +77,9 @@ namespace SchoolFighter
             _enemyHealthBar.Draw(spriteBatch);
             spriteBatch.DrawString(TimerFont, TimerText, new Vector2(Globals.winWidth / 2, 50), Color.White, 0, TimerFontOrigin, 1.0f, SpriteEffects.None, 0.5f);
             HitboxManager.Draw(spriteBatch);
+            _map.DrawTiles();
         }
+
 
         public override void AddData(string additionalData="")
         {
