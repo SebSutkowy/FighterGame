@@ -1,27 +1,31 @@
 ﻿using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SchoolFighter;
+using Microsoft.Xna.Framework.Input;
+
 namespace SchoolFighter
 {
     public static class GameManager
     {
-        private static Character _hero = new Character();
+        private static Character _player = new Character();
 
 
 
         public static void LoadContent(ContentManager content)
         {
-            _hero.LoadContent(content);
+            _player.LoadContent(content);
         }
 
         public static void Update()
         {
             
-            _hero.Update();
+            _player.Update();
         }
 
         public static void Draw(SpriteBatch spriteBatch)
         {
-            _hero.Draw(spriteBatch);
+            _player.Draw(spriteBatch);
         }
     }
 }

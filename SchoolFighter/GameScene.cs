@@ -8,7 +8,7 @@ namespace SchoolFighter
 {
     internal class GameScene : Scene
     {
-        Character _player { get; set; }
+        
         Character _enemy { get; set; }
         HealthBar _playerHealthBar { get; set; }
         HealthBar _enemyHealthBar { get; set; }
@@ -16,13 +16,18 @@ namespace SchoolFighter
         public string TimerText { get; set; }
         public SpriteFont TimerFont { get; set; }
         public Vector2 TimerFontOrigin;
-        
+
+        private static Character _player = new Character();
+
+
         public GameScene() { }
 
         public override void LoadContent()
         {
-            _player = new Character(Globals._playerTexture[0], Vector2.Zero, Color.White, 300.0f, Vector2.Zero, 100, 10, 1, Globals._playerTexture);
-            _enemy = new Character(Globals._playerTexture[0], new Vector2(800, 0), Color.White, 300.0f, Vector2.Zero, 100, 10, 2, Globals._playerTexture);
+            _player = new Character(Globals._playerTexture[0], Vector2.Zero, Color.White, 300.0f, Vector2.Zero, 100, 10, 1
+    );
+            _enemy = new Character(Globals._playerTexture[0], new Vector2(800, 0), Color.White, 300.0f, Vector2.Zero, 100, 10, 2);
+
             _enemy.SetBinds(
                 new Dictionary<string, Microsoft.Xna.Framework.Input.Keys>()
                 {
@@ -38,6 +43,8 @@ namespace SchoolFighter
             Timer = 300 * 60;
             TimerFont = Globals.Content.Load<SpriteFont>("TimerFont");
         }
+
+        
 
         public override void Update() 
         {
