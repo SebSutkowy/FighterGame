@@ -10,7 +10,7 @@ namespace SchoolFighter
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-
+        private GamepadCursor gamepadCursor;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -43,6 +43,7 @@ namespace SchoolFighter
             Globals._playerTexture.Add(Content.Load<Texture2D>("ryu_idle2"));
             Globals._playerTexture.Add(Content.Load<Texture2D>("ryu_idle3"));
             Globals._playerTexture.Add(Content.Load<Texture2D>("ryu_idle4"));
+            Globals.cursorTexture=(Content.Load<Texture2D>("cursor"));
             Globals.Content = Content;
             SceneManager.Scenes = new Dictionary<string, Scene>
             {
@@ -54,8 +55,7 @@ namespace SchoolFighter
             };
             SceneManager.CurrentScene = SceneManager.Scenes["MainMenu"];
             SceneManager.PreviousScene = null;
-            SceneManager.LoadContent();            
-
+            SceneManager.LoadContent();
         }
 
         protected override void Update(GameTime gameTime)
@@ -67,7 +67,11 @@ namespace SchoolFighter
                 SceneManager.ChangeScene("Pause");
 
             }
-            
+            if (GamePad.GetState(PlayerIndex.One).IsConnected)
+            {
+                gamepadCursor.Update(gameTime);
+            }
+
 
             // TODO: Add your update logic here
             Globals.UpdateTime(gameTime);
@@ -87,6 +91,7 @@ namespace SchoolFighter
 
             _spriteBatch.Begin();
             SceneManager.Draw(_spriteBatch);
+            gamepadCursor.Draw(_spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);
