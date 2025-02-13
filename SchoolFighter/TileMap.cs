@@ -25,39 +25,39 @@ namespace SchoolFighter
                 //tiles.Add(new Vector2((i % 3 * 100), (i / 3 * 100)), new Tile(100, new Vector2((i % 3 * 100), (i / 3 * 100)), Game1._pixelTemplate));
                 if (i == 3)
                 {
-                   //tiles.Add(new Vector2((i % 5 * 100), (i / 5 * 100)), new Tile(100, new Vector2((i % 5 * 100), (i / 5 * 100)), Game1._pixelTemplate));
+                   //tiles.Add(new Vector2(((i % 5) * 100), ((i / 5) * 100)), new Tile(100, new Vector2(((i % 5) * 100), ((i / 5) * 100)), Game1._pixelTemplate));
 
                 }
                 if (i == 4)
                 {
-                    Debug.WriteLine($"{i % 5 * 100},{i / 5 * 100}");
-                    tiles.Add(new Vector2((i % 5 * 100), (i / 5 * 100)), new Tile(100, new Vector2((i % 5 * 100), (i / 5 * 100)), Game1._pixelTemplate));
+                    Debug.WriteLine($"{(i % 5) * 100},{(i / 5) * 100}");
+                    tiles.Add(new Vector2(((i % 5) * 100), ((i / 5) * 100)), new Tile(100, new Vector2(((i % 5) * 100), ((i / 5) * 100)), Game1._pixelTemplate));
                     
                 }
                 if (i == 5)
                 {
-                    tiles.Add(new Vector2((i % 5 * 100), (i / 5 * 100)), new Tile(100, new Vector2((i % 5 * 100), (i / 5 * 100)), Game1._pixelTemplate));
+                    tiles.Add(new Vector2(((i % 5) * 100), ((i / 5) * 100)), new Tile(100, new Vector2(((i % 5) * 100), ((i / 5) * 100)), Game1._pixelTemplate));
 
                 }
              
                 if (i == 10)
                 {
-                    tiles.Add(new Vector2((i % 5 * 100), (i / 5 * 100)), new Tile(100, new Vector2((i % 5 * 100), (i / 5 * 100)), Game1._pixelTemplate));
+                    tiles.Add(new Vector2(((i % 5) * 100), ((i / 5) * 100)), new Tile(100, new Vector2(((i % 5) * 100), ((i / 5) * 100)), Game1._pixelTemplate));
 
                 }
                 if (i == 12)
                 {
-                    tiles.Add(new Vector2((i % 5 * 100), (i / 5 * 100)), new Tile(100, new Vector2((i % 5 * 100), (i / 5 * 100)), Game1._pixelTemplate));
+                    tiles.Add(new Vector2(((i % 5) * 100), ((i / 5) * 100)), new Tile(100, new Vector2(((i % 5) * 100), ((i / 5) * 100)), Game1._pixelTemplate));
 
                 }
                 if (i == 20)
                 {
-                    tiles.Add(new Vector2((i % 5 * 100), (i / 5 * 100)), new Tile(100, new Vector2((i % 5 * 100), (i / 5 * 100)), Game1._pixelTemplate));
+                    tiles.Add(new Vector2(((i % 5) * 100), ((i / 5) * 100)), new Tile(100, new Vector2(((i % 5) * 100), ((i / 5) * 100)), Game1._pixelTemplate));
 
                 }
                 if (i == 22)
                 {
-                    tiles.Add(new Vector2((i % 5 * 100), (i / 5 * 100)), new Tile(100, new Vector2((i % 5 * 100), (i / 5 * 100)), Game1._pixelTemplate));
+                    tiles.Add(new Vector2(((i % 5) * 100), ((i / 5) * 100)), new Tile(100, new Vector2(((i % 5) * 100), ((i / 5) * 100)), Game1._pixelTemplate));
 
                 }
                 
