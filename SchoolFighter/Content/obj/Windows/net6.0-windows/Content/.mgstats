@@ -1,4 +1,6 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/13KatchyV/Source/Repos/FighterGame/SchoolFighter/Content/180x320.png","C:/Users/13KatchyV/Source/Repos/FighterGame/SchoolFighter/Content/bin/Windows/Content/180x320.xnb","TextureProcessor","Texture2DContent",173,230485,0.1981209
+"C:/Users/13KatchyV/Source/Repos/FighterGame/SchoolFighter/Content/297x528.png","C:/Users/13KatchyV/Source/Repos/FighterGame/SchoolFighter/Content/bin/Windows/Content/297x528.xnb","TextureProcessor","Texture2DContent",165,627349,0.0214755
 "C:/Users/13LestayM/Source/Repos/FighterGame/SchoolFighter/Content/180x320.png","C:/Users/13LestayM/Source/Repos/FighterGame/SchoolFighter/Content/bin/Windows/Content/180x320.xnb","TextureProcessor","Texture2DContent",173,230485,0.1334869
 "C:/Users/13LestayM/Source/Repos/FighterGame/SchoolFighter/Content/297x528.png","C:/Users/13LestayM/Source/Repos/FighterGame/SchoolFighter/Content/bin/Windows/Content/297x528.xnb","TextureProcessor","Texture2DContent",165,627349,0.0184159
 "C:/Users/13LestayM/Source/Repos/FighterGame/SchoolFighter/Content/ryu_idle0.png","C:/Users/13LestayM/Source/Repos/FighterGame/SchoolFighter/Content/bin/Windows/Content/ryu_idle0.xnb","TextureProcessor","Texture2DContent",183510,627349,0.1550964
