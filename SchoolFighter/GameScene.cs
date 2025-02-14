@@ -24,9 +24,11 @@ namespace SchoolFighter
 
         public override void LoadContent()
         {
-            _player = new Character(Globals._playerTexture[0], Vector2.Zero, Color.White, 300.0f, Vector2.Zero, 100, 10, 1
-    );
+            _player = new Character(Globals._playerTexture[0], Vector2.Zero, Color.White, 300.0f, Vector2.Zero, 100, 10, 1);
+            _player.LoadContent(Globals.Content);
             _enemy = new Character(Globals._playerTexture[0], new Vector2(800, 0), Color.White, 300.0f, Vector2.Zero, 100, 10, 2);
+            _enemy.LoadContent(Globals.Content);
+
 
             _enemy.SetBinds(
                 new Dictionary<string, Microsoft.Xna.Framework.Input.Keys>()
@@ -35,7 +37,7 @@ namespace SchoolFighter
                     {"Move right", Microsoft.Xna.Framework.Input.Keys.L },
                     {"Jump", Microsoft.Xna.Framework.Input.Keys.I },
                     {"Crouch", Microsoft.Xna.Framework.Input.Keys.K },
-                    {"Punch", Microsoft.Xna.Framework.Input.Keys.U }
+                    {"Punch", Microsoft.Xna.Framework.Input.Keys.O }
                 }
             );
             _playerHealthBar = new HealthBar(_player.Health, Vector2.Zero, new Vector2(Globals.winWidth * 2 / 5, Globals.winHeight / 12), Directions.Right);

@@ -36,6 +36,11 @@ namespace SchoolFighter
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            Globals._blankTexture = Content.Load<Texture2D>("297x528");
+            for(int i=0; i<5; i++)
+            {
+                Globals._playerTexture.Add(Content.Load<Texture2D>($"ryu_idle{i}"));
+            }
 
             GameManager.LoadContent(Content);
             Globals.Content = Content;

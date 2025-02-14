@@ -38,7 +38,14 @@ namespace SchoolFighter
         private AnimationManager _animationManager = new AnimationManager();
         private Texture2D _texture;
         private const float JumpDuration = 0.75f;
-        private Dictionary<string,Keys>KeyBinds = new Dictionary<string,Keys>();    
+        private Dictionary<string, Keys> KeyBinds = new Dictionary<string, Keys>()
+        {
+            {"Move left",  Keys.A },
+            {"Move right", Keys.D },
+            {"Jump",  Keys.W },
+            {"Crouch",  Keys.S },
+            {"Punch",  Keys.E }
+        };    
 
 
         public List<Texture2D> Textures { get; set; }
@@ -67,6 +74,8 @@ namespace SchoolFighter
         public void Update(bool enableMovement = true)
         {
             // check for attacks
+            Debug.WriteLine($"Team: {Team}, Position: {Position} ");
+            _animationManager.Update("Idle", 0);
             if (AttackCooldown <= 0 || Falling > 0)
             {
                 Position += new Vector2(0, -Velocity.Y * Globals.deltaTime);
@@ -114,11 +123,21 @@ namespace SchoolFighter
             Hitbox = !Crouching ?
                 new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height) :
                 new Rectangle((int)Position.X, (int)Position.Y + Texture.Height / 4, Texture.Width, 3*Texture.Height / 4);
+            if(Crouching)
+            {
+                _animationManager.Update("Crouch", 4);
+            }
             AttackCooldown = MathHelper.Max(AttackCooldown - 1, 0);
             Falling = MathHelper.Max(Falling - 1, 0);
             StunTimer = Math.Sign(StunTimer)*(Math.Abs(StunTimer) - 1);
             
 
+        }
+
+        public new void Draw(SpriteBatch spriteBatch)
+        {
+            //spriteBatch.Draw(Texture, Hitbox, Color.White);
+            _animationManager.Draw(spriteBatch, Position, 5.0f);
         }
 
         public void LoadContent(ContentManager content)
@@ -211,11 +230,12 @@ namespace SchoolFighter
 
         public void Move()
         { 
-            int[] movement = { Globals.keys.IsKeyDown(Keys.A) ? 1 : 0, Globals.keys.IsKeyDown(Keys.D) ? 1 : 0 };
-            if (Globals.keys.IsKeyDown(Keys.W) && !Jumping)
+            int[] movement = { Globals.keys.IsKeyDown(KeyBinds["Move left"]) ? 1 : 0, Globals.keys.IsKeyDown(KeyBinds["Move right"]) ? 1 : 0 };
+            if (Globals.keys.IsKeyDown(KeyBinds["Jump"]) && !Jumping)
             {
                 Velocity = new Vector2(Velocity.X, Speed * 5); // Jump
                 Jumping = true;
+                _animationManager.Update("Jump", 3);
             }
             if (AttackCooldown <= 0 || Falling > 0 )
             {
@@ -223,10 +243,12 @@ namespace SchoolFighter
                 if (movement[1] - movement[0] < 0) // Change the directions the player is facing
                 {
                     Facing = Directions.Left;
+                    _animationManager.Update("WalkLeft", 1);
                 }
                 else if (movement[1] - movement[0] > 0)
                 {
                     Facing = Directions.Right;
+                    _animationManager.Update("WalkRight", 2);
                 }
             }
         }
@@ -235,7 +257,7 @@ namespace SchoolFighter
         {
             // Generate Hitboxes
             if (AttackCooldown > 0) return null;
-            if(Globals.IsKeyPressed(Keys.S) && Jumping)
+            if (Globals.IsKeyPressed(KeyBinds["Crouch"]) && Jumping)
             {
                 AttackCooldown = AttackCooldownMax;
                 Falling = AttackCooldownMax;
@@ -243,18 +265,21 @@ namespace SchoolFighter
                 return new AttackHitbox(Team, 0, 0, Texture.Width, 3*Texture.Height/2, AttackCooldownMax/2, (int)(Strength*1.25f), Directions.Down, this);
                 // Ground Pound
             }
-            Crouching = (Globals.keys.IsKeyDown(Keys.S) && !Jumping) ? true : false; 
-            if (Globals.IsKeyPressed(Keys.E) && Facing == Directions.Left)
+            Crouching = (Globals.keys.IsKeyDown(KeyBinds["Crouch"]) && !Jumping) ? true : false; 
+            if (Globals.IsKeyPressed(KeyBinds["Punch"]) && Facing == Directions.Left)
             {
                 AttackCooldown = AttackCooldownMax;
+                _animationManager.Update("MediumKick", 9);
                 return new AttackHitbox(Team, Hitbox.X - Hitbox.Width*0.25f, Hitbox.Y, Texture.Width*1.25f, Texture.Height/2, AttackCooldownMax/2, Strength, Directions.Left, Vector2.Zero);
                 // Left punch
             }
-            else if (Globals.IsKeyPressed(Keys.E) && Facing == Directions.Right)
+            else if (Globals.IsKeyPressed(KeyBinds["Punch"]) && Facing == Directions.Right)
             {
                 AttackCooldown = AttackCooldownMax;
+                _animationManager.Update("HeavyPunch", 7);
                 return new AttackHitbox(Team, Hitbox.X, Hitbox.Y, Texture.Width*1.25f, Texture.Height/2, AttackCooldownMax/2, Strength, Directions.Right, Vector2.Zero);
                 // Right punch
+
             }
             return null;
         }
