@@ -167,12 +167,14 @@ namespace SchoolFighter
             return null;
         }
 
-        public new void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, bool flip=false)
         {
             Debug.WriteLine($"Current frame: {CurrentFrame}");
             CurrentFrame++;
             CurrentFrame = (CurrentFrame) % CyclePeriod;
-            spriteBatch.Draw(Textures[CurrentFrame / (CyclePeriod / Textures.Count)], Hitbox, Color.White);
+            int frame = CurrentFrame / (CyclePeriod / Textures.Count);
+            Vector2 Origin = new Vector2(Textures[frame].Width/2,Textures[frame].Height/2);
+            spriteBatch.Draw(Textures[frame], Hitbox, Hitbox, Color.White, 0, Origin, (flip ? SpriteEffects.FlipHorizontally : SpriteEffects.None), 0.5f);
         }
 
     }

@@ -72,8 +72,8 @@ namespace SchoolFighter
         public override void Draw(SpriteBatch spriteBatch)
         {
             //spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, Globals.winWidth, Globals.winHeight), Color.White);
-            _player.Draw(spriteBatch);
-            _enemy.Draw(spriteBatch);
+            _player.Draw(spriteBatch, false);
+            _enemy.Draw(spriteBatch, true);
             _playerHealthBar.Draw(spriteBatch);
             _enemyHealthBar.Draw(spriteBatch);
             spriteBatch.DrawString(TimerFont, TimerText, new Vector2(Globals.winWidth / 2, 50), Color.White, 0, TimerFontOrigin, 1.0f, SpriteEffects.None, 0.5f);
